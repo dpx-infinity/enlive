@@ -561,8 +561,8 @@
  [& forms] `(fn [node#] (at node# :lockstep ~(apply array-map forms))))
 
 (defmacro snippet* [nodes args & forms]
-  `(let [nodes# (map annotate ~nodes)]
-     (fn ~args
+  `(fn ~args
+     (let [nodes# (map annotate ~nodes)]
        (doall (flatmap (transformation ~@forms) nodes#)))))
     
 (defmacro snippet 
